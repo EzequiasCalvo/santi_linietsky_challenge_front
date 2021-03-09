@@ -9,6 +9,7 @@ import {
   FormFieldWrapper,
   Button,
 } from "../style/login";
+import LeftDesign from "../layout/LeftDesign";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +18,8 @@ const Login = () => {
   return (
     <>
       <MainWrapper>
-        <div style={{ width: "40%" }}></div>
+        {/* <div style={{ width: "40%" }}></div> */}
+        <LeftDesign />
         <Rightwrapper>
           <SignUpWrapper>
             Don't have an account?
