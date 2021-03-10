@@ -39,7 +39,7 @@ const Login = () => {
           <SignUpWrapper>
             Don't have an account?
             {/* <Link to="/signup"> */}
-            <TopRightButton onClick="handleClick">Sign Up</TopRightButton>
+            <TopRightButton onClick={handleClick}>Sign Up</TopRightButton>
             {/* </Link> */}
           </SignUpWrapper>
           <FormWrapper>
