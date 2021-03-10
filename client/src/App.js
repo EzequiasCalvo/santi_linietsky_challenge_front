@@ -18,7 +18,7 @@ function App() {
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </Router>
-      <Login />
+      {/* <Login /> */}
     </div>
   );
 }
