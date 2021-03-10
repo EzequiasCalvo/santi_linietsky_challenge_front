@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import history from "../history";
+import LeftDesign from "../layout/LeftDesign";
 import {
   MainWrapper,
   Rightwrapper,
@@ -9,45 +12,50 @@ import {
   FormFieldWrapper,
   Button,
 } from "../style/login";
-import LeftDesign from "../layout/LeftDesign";
-import history from "../history";
-import { Link } from "react-router-dom";
 
-const Login = () => {
+const SignUp = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleClick = (e) => {
-    return history.push("/signup");
-  };
-
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (localStorage.getItem("isLogged")) {
-      history.push("/welcome");
+    var regEx = /\S+@\S+\.\S+/;
+    console.log(regEx.test(email));
+    if (regEx.test(email) && password.length >= 4) {
+      localStorage.setItem("isLogged", true);
+      history.push("/");
     } else {
-      throw new Error("You are not registered");
+      localStorage.setItem("isLogged", false);
     }
   };
 
   return (
     <>
       <MainWrapper>
-        {/* <div style={{ width: "40%" }}></div> */}
         <LeftDesign />
         <Rightwrapper>
           <SignUpWrapper>
             Don't have an account?
-            {/* <Link to="/signup"> */}
-            <TopRightButton onClick="handleClick">Sign Up</TopRightButton>
-            {/* </Link> */}
+            <Link to="/">
+              <TopRightButton>Sign In</TopRightButton>
+            </Link>
           </SignUpWrapper>
           <FormWrapper>
             <FormInnerWrapper>
-              <h2>Sign In</h2>
-              <form onSubmit={handleLogin}>
+              <h2>Sign Up</h2>
+              <form onSubmit={handleSubmit}>
                 <FormFieldWrapper>
-                  <i className="fas fa-user-circle"></i>
+                  <i className="fas fa-envelope"></i>
+                  <input
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                    type="text"
+                    placeholder="Name"
+                  />
+                </FormFieldWrapper>
+                <FormFieldWrapper>
+                  <i className="fas fa-envelope"></i>
                   <input
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
@@ -56,16 +64,16 @@ const Login = () => {
                   />
                 </FormFieldWrapper>
                 <FormFieldWrapper>
-                  <i className="fas fa-lock"></i>
+                  <i className="fas fa-envelope"></i>
                   <input
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
-                    type="password"
+                    type="text"
                     placeholder="Password"
                   />
                 </FormFieldWrapper>
                 <div className="signin-content">
-                  <Button>SIGN IN</Button>
+                  <Button>CONTINUE</Button>
                 </div>
               </form>
             </FormInnerWrapper>
@@ -76,4 +84,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
